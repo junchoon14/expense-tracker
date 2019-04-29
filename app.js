@@ -14,9 +14,10 @@ db.once('open', () => {
   console.log('mongodb connected!')
 })
 
-app.get('/', (req, res) => {
-  res.send('index')
-})
+app.use('/', require('./routes/home'))
+app.use('/records', require('./routes/record'))
+
+
 
 app.listen(3000, () => {
   console.log('App is running!')
