@@ -14,7 +14,10 @@ router.get('/new', (req, res) => {
 
 // show detail page
 router.get('/:id', (req, res) => {
-  res.send('detail page')
+  Record.findById(req.params.id, (err, record) => {
+    if (err) return console.error(err)
+    return res.render('detail', { record })
+  })
 })
 
 //  create feature
