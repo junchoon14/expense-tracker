@@ -1,4 +1,6 @@
 <p>{{{record.name}}}</p>
 <a href="/">back</a>
 <a href="#">edit</a>
-<button type="submit">delete</button>
+<form action="/records/{{{record.id}}}/delete" method="POST" style="display: inline;">
+  <button type="submit">delete</button>
+</form>
