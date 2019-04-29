@@ -31,12 +31,21 @@ router.post('/', (req, res) => {
 
 // edit page
 router.get('/:id/edit', (req, res) => {
-  res.send('edit')
+  Record.findById(req.params.id, (err, record) => {
+    return res.render('edit', { record })
+  })
 })
 
 // edit feature
 router.post('/:id', (req, res) => {
-  res.send('edit')
+  Record.findById(req.params.id, (err, record) => {
+    if (err) return console.error(err)
+    record.name = req.body.name
+    record.save(err => {
+      if (err) return console.error(err)
+      return res.redirect(`/records/${req.params.id}`)
+    })
+  })
 })
 
 // delete feather
