@@ -3,7 +3,7 @@ const router = express.Router()
 const Record = require('../models/record')
 
 router.get('/', (req, res) => {
-  res.send('index')
+  return res.render('index')
 })
 
 module.exports = router

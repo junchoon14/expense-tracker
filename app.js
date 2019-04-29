@@ -1,8 +1,12 @@
 const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
+const exphbs = require('express-handlebars')
 
-mongoose.connect('mongodb://localhost/expense', { useNewUrlParser: true, useCreateIndex: ture })
+app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
+app.set('view engine', 'handlebars')
+
+mongoose.connect('mongodb://localhost/record', { useNewUrlParser: true })
 
 const db = mongoose.connection
 
@@ -16,7 +20,6 @@ db.once('open', () => {
 
 app.use('/', require('./routes/home'))
 app.use('/records', require('./routes/record'))
-
 
 
 app.listen(3000, () => {
