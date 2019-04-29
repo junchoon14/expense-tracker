@@ -7,19 +7,23 @@ router.get('/', (req, res) => {
   res.send('list all records')
 })
 
+// create page
+router.get('/new', (req, res) => {
+  return res.render('new')
+})
+
 // show detail page
 router.get('/:id', (req, res) => {
   res.send('detail page')
 })
 
-// create page
-router.get('/new', (req, res) => {
-  res.send('new')
-})
-
 //  create feature
 router.post('/', (req, res) => {
-  res.send('new')
+  const record = Record(req.body)
+  record.save(err => {
+    if (err) return console.error(err)
+    res.redirect('/')
+  })
 })
 
 // edit page
