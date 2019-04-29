@@ -10,9 +10,8 @@ const recordSchema = new Schema({
     require: true
   },
   date: {
-    type: Date,
+    type: String,
     require: true,
-    default: Date.now
   },
   amount: {
     type: String,
@@ -22,12 +21,12 @@ const recordSchema = new Schema({
     type: String,
     require: true
   },
-  userId: {
-    type: Schema.Types.ObjectId,
-    ref: 'User',
-    index: true,
-    required: true,
-  },
+  // userId: {
+  //   type: Schema.Types.ObjectId,
+  //   ref: 'User',
+  //   index: true,
+  //   required: true,
+  // },
 })
 
 module.exports = mongoose.model('Record', recordSchema)
