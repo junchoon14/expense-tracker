@@ -11,7 +11,7 @@ app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
 
-mongoose.connect('mongodb://localhost/record', { useNewUrlParser: true })
+mongoose.connect('mongodb://localhost/record', { useNewUrlParser: true, useCreateIndex: true })
 
 const db = mongoose.connection
 

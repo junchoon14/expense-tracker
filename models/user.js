@@ -13,6 +13,9 @@ const userSchema = new Schema({
     type: String,
     require: true
   },
+  totalAmount: {
+    type: String,
+  },
   date: {
     type: Date,
     default: Date.now
