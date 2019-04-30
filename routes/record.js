@@ -15,7 +15,7 @@ router.get('/new', authenticated, (req, res) => {
 
 // show detail page
 router.get('/:id', authenticated, (req, res) => {
-  Record.findById(req.params.id, (err, record) => {
+  Record.findOne({ _id: req.params.id, userId: req.user._id }, (err, record) => {
     if (err) return console.error(err)
     return res.render('detail', { record })
   })
@@ -23,23 +23,29 @@ router.get('/:id', authenticated, (req, res) => {
 
 //  create feature
 router.post('/', authenticated, (req, res) => {
-  const record = Record(req.body)
+  const record = Record({
+    name: req.body.name,
+    category: req.body.category,
+    date: req.body.date,
+    amount: req.body.amount,
+    userId: req.user._id,
+  })
   record.save(err => {
     if (err) return console.error(err)
-    res.redirect('/')
+    return res.redirect('/')
   })
 })
 
 // edit page
 router.get('/:id/edit', authenticated, (req, res) => {
-  Record.findById(req.params.id, (err, record) => {
+  Record.findOne({ _id: req.params.id, userId: req.user._id }, (err, record) => {
     return res.render('edit', { record })
   })
 })
 
 // edit feature
 router.put('/:id', authenticated, (req, res) => {
-  Record.findById(req.params.id, (err, record) => {
+  Record.findOne({ _id: req.params.id, userId: req.user._id }, (err, record) => {
     if (err) return console.error(err)
     record.name = req.body.name
     record.save(err => {
@@ -51,7 +57,7 @@ router.put('/:id', authenticated, (req, res) => {
 
 // delete feather
 router.delete('/:id/delete', authenticated, (req, res) => {
-  Record.findById(req.params.id, (err, record) => {
+  Record.findOne({ _id: req.params.id, userId: req.user._id }, (err, record) => {
     if (err) return console.error(err)
     record.remove(err => {
       if (err) return console.error(err)

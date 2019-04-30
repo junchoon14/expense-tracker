@@ -1,8 +1,8 @@
 const express = require('express')
 const router = express.Router()
+const User = require('../models/user')
 const passport = require('passport')
 const bcrypt = require('bcryptjs')
-const User = require('../models/user')
 
 // login page
 router.get('/login', (req, res) => {
@@ -22,11 +22,10 @@ router.get('/register', (req, res) => {
   res.render('register')
 })
 
-// register check
+// regist check
 router.post('/register', (req, res) => {
   const { name, email, password, password2 } = req.body
-
-  // 加入錯誤訊息提示
+  // add error messages
   let errors = []
   if (!name || !email || !password || !password2) {
     errors.push({ message: '所有欄位都是必填' })
@@ -45,18 +44,18 @@ router.post('/register', (req, res) => {
   } else {
     User.findOne({ email: email }).then(user => {
       if (user) {
-        console.log('User already exists')
+        console.log('User already exits')
         res.render('register', {
           name,
           email,
           password,
-          password2,
+          password2
         })
       } else {
         const newUser = new User({
           name,
           email,
-          password,
+          password
         })
 
         bcrypt.genSalt(10, (err, salt) =>
@@ -65,7 +64,9 @@ router.post('/register', (req, res) => {
             newUser.password = hash
             newUser
               .save()
-              .then(user => res.redirect('/'))
+              .then(user => {
+                res.redirect('/')
+              })
               .catch(err => console.log(err))
           })
         )
@@ -73,6 +74,7 @@ router.post('/register', (req, res) => {
     })
   }
 })
+
 
 // logout
 router.get('/logout', (req, res) => {

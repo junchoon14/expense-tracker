@@ -43,7 +43,7 @@ require('./config/passport')(passport)
 app.use(flash())
 
 app.use((req, res, next) => {
-  res.locals.use = req.user
+  res.locals.user = req.user
   res.locals.isAuthenticated = req.isAuthenticated()
   res.locals.success_msg = req.flash('success_msg')
   res.locals.warning_msg = req.flash('warning_msg')
