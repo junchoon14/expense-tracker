@@ -1,13 +1,64 @@
-<a href="/records/new">Create</a>
-<ul>
-  {{#each records}}
-  <li>
-    {{{this.name}}}
-    <a href="/records/{{this.id}}">detail</a>
-    <a href="/records/{{this.id}}/edit">edit</a>
-    <form action="/records/{{{this.id}}}/delete" method="POST" style="display: inline;">
-      <button type="submit">delete</button>
-    </form>
-  </li>
-  {{/each}}
-</ul>
+<div class="container">
+  <div class="row justify-content-start">
+    <div class="col-4">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="inputGroupSelect01">月份</label>
+        </div>
+        <select class="custom-select" id="inputGroupSelect01">
+          <option selected>選取...</option>
+          <option value="1">一月</option>
+          <option value="2">二月</option>
+          <option value="3">三月</option>
+          <option value="3">四月</option>
+          <option value="3">五月</option>
+          <option value="3">六月</option>
+          <option value="3">七月</option>
+          <option value="3">八月</option>
+          <option value="3">九月</option>
+          <option value="3">十月</option>
+          <option value="3">十一月</option>
+          <option value="3">十二月</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="col-4">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="inputGroupSelect01">排序</label>
+        </div>
+        <select class="custom-select" id="inputGroupSelect01">
+          <option selected>選取...</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-3">
+  <ul class="list-group">
+    {{#each records}}
+    <li class="list-group-item">
+      <div class="row">
+        <div><i class="fas fa-home height-auto"></i></div>
+        <div class="col-auto mr-auto">
+
+          <h4 style="display: inline; vertical-align: middle;">{{{this.name}}}</h4>
+        </div>
+
+        <div class="col-auto">
+          <a href="/todos/{{{this.id}}}" class="btn btn-secondary">Detail</a>
+          <a href="/todos/{{{this.id}}}/edit" class="btn btn-success">Edit</a>
+          <form action="/todos/{{{this.id}}}/delete?_method=DELETE" method="POST" style="display: inline;">
+            <button type="submit" class="btn btn-danger">Delete</button>
+          </form>
+        </div>
+      </div>
+    </li>
+    {{/each}}
+  </ul>
+</div>
