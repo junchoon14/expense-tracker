@@ -1,17 +1,20 @@
-<div class="container form_container">
+<div class="container mt-5">
   <div class="row">
-    <div class="col-12 col-md-10 mx-auto">
-      <h4 class="text-center mb-3">請修改你的支出</h4>
+    <div class="col-12 col-md-8 mx-auto">
+      <div class="row justify-content-start mb-3">
+        <small class="mr-5">*為必填項目</small>
+        <h4>請修改你的支出</h4>
+      </div>
+
       <form action="/records/{{record.id}}/edit?_method=PUT" method="POST">
         <div class="form-group">
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text bg-light" id="">
-                名稱
+                名稱*
               </span>
             </div>
-            <input type="text" class="form-control" id="name" placeholder="Enter Name" name="name"
-              value="{{record.name}}">
+            <input type="text" class="form-control" id="name" name="name" value="{{record.name}}">
           </div>
         </div>
 
@@ -19,7 +22,7 @@
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text bg-light" id="">
-                日期
+                日期*
               </span>
             </div>
             <input type="date" class="form-control" id="name_en" placeholder="Enter Date" name="name_en"
@@ -31,7 +34,7 @@
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text bg-light" id="">
-                類別
+                類別*
               </span>
             </div>
             <select class="custom-select" id="inputGroupSelect01">
@@ -49,11 +52,10 @@
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text bg-light" id="">
-                金額
+                金額*
               </span>
             </div>
-            <input type="text" class="form-control" id="photo-link" placeholder="Link to Photo" name="image"
-              value="{{record.price}}">
+            <input type="text" class="form-control" id="photo-link" name="image" value="{{record.price}}">
           </div>
         </div>
 
@@ -61,7 +63,7 @@
       </form>
 
       <form action="/records/{{record.id}}/delete" method="POST">
-        <button type="submit" class="btn btn-danger delete_button float-right">刪除</button>
+        <button type="submit" class="btn btn-danger float-right mt-2">刪除</button>
       </form>
 
     </div>
