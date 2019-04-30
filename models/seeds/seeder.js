@@ -1,8 +1,8 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcryptjs')
-const Restaurant = require('../restaurant')
+const Record = require('../record')
 const User = require('../user')
-const restaurant = require('../../restaurant.json')
+const records = require('../../records.json')
 
 mongoose.connect('mongodb://localhost/restaurant', { useNewUrlParser: true, useCreateIndex: true })
 
@@ -27,45 +27,45 @@ db.once('open', () => {
       password: '567890',
     }]
 
-  const createRestaurant = (i, user) => {
-    Restaurant.create({
-      name: restaurant[i].name,
-      name_en: restaurant[i].name_en,
-      category: restaurant[i].category,
-      image: restaurant[i].image,
-      location: restaurant[i].location,
-      phone: restaurant[i].phone,
-      google_map: restaurant[i].google_map,
-      rating: restaurant[i].rating,
-      description: restaurant[i].description,
+  const createRecord = (i, user) => {
+    Record.create({
+      name: records[i].name,
+      category: records[i].category,
+      date: records[i].date,
+      amount: records[i].amount,
       userId: user._id,
     })
   }
 
   users.forEach(user => {
-    bcrypt.genSalt(10, (err, salt) =>
-      bcrypt.hash(user.password, salt, (err, hash) => {
-        if (err) throw err
-        user.password = hash
-        User.create(user)
-      })
-    )
+    if (user) {
+      console.log('User already exits')
+    } else {
+      bcrypt.genSalt(10, (err, salt) =>
+        bcrypt.hash(user.password, salt, (err, hash) => {
+          if (err) throw err
+          user.password = hash
+          User.create(user)
+        })
+      )
+    }
   })
 
   User.findOne({ name: 'Alvis' }).then(user => {
     if (user) {
-      for (let i = 0; i < 3; i++) {
-        createRestaurant(i, user)
+      for (let i = 0; i < records.length; i++) {
+        createRecord(i, user)
       }
     }
   })
 
-  User.findOne({ name: 'Jason' }).then(user => {
+  User.findOne({ name: 'Alvis' }).then(user => {
     if (user) {
-      for (let i = 3; i < 6; i++) {
-        createRestaurant(i, user)
+      for (let i = 0; i < records.length; i++) {
+        createRecord(i, user)
       }
     }
   })
+
   console.log('done')
 })
