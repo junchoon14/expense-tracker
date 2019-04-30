@@ -10,8 +10,16 @@ const methodOverride = require('method-override')
 const session = require('express-session')
 const passport = require('passport')
 const flash = require('connect-flash')
+const hbs = exphbs.create({
+  helpers: {
+    setSelected: function (value, checkedValue) {
+      return value == checkedValue ? 'selected' : ''
+    }
+  },
+  defaultLayout: 'main',
+})
 
-app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
+app.engine('handlebars', hbs.engine)
 app.set('view engine', 'handlebars')
 app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: true }))

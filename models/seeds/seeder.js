@@ -4,7 +4,7 @@ const Record = require('../record')
 const User = require('../user')
 const records = require('../../records.json')
 
-mongoose.connect('mongodb://localhost/restaurant', { useNewUrlParser: true, useCreateIndex: true })
+mongoose.connect('mongodb://localhost/record', { useNewUrlParser: true, useCreateIndex: true })
 
 const db = mongoose.connection
 
@@ -38,22 +38,18 @@ db.once('open', () => {
   }
 
   users.forEach(user => {
-    if (user) {
-      console.log('User already exits')
-    } else {
-      bcrypt.genSalt(10, (err, salt) =>
-        bcrypt.hash(user.password, salt, (err, hash) => {
-          if (err) throw err
-          user.password = hash
-          User.create(user)
-        })
-      )
-    }
+    bcrypt.genSalt(10, (err, salt) =>
+      bcrypt.hash(user.password, salt, (err, hash) => {
+        if (err) throw err
+        user.password = hash
+        User.create(user)
+      })
+    )
   })
 
   User.findOne({ name: 'Alvis' }).then(user => {
     if (user) {
-      for (let i = 0; i < records.length; i++) {
+      for (let i = 0; i < 5; i++) {
         createRecord(i, user)
       }
     }
@@ -61,7 +57,7 @@ db.once('open', () => {
 
   User.findOne({ name: 'Alvis' }).then(user => {
     if (user) {
-      for (let i = 0; i < records.length; i++) {
+      for (let i = 0; i < 5; i++) {
         createRecord(i, user)
       }
     }

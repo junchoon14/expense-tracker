@@ -26,9 +26,9 @@
     <div class="col-4">
       <div class="input-group mb-3">
         <div class="input-group-prepend">
-          <label class="input-group-text" for="inputGroupSelect01">類別</label>
+          <label class="input-group-text" for="display-category">類別</label>
         </div>
-        <select class="custom-select" id="inputGroupSelect01">
+        <select class="custom-select" id="display-category">
           <option selected>選取...</option>
           <option value="1">家居物業</option>
           <option value="2">交通出行</option>
@@ -55,16 +55,16 @@
     {{#each records}}
     <div class="row">
       <div class="col-8 decoration-none">
-        <a href="/records/{{record.id}}">
+        <a href="/records/{{this.id}}">
           <li class="list-group-item ">
             <div class="row">
               <div class="col-auto">
-                <i class="fas fa-home cate-icon "></i>
+                <i class="fas {{this.category}} cate-icon "></i>
               </div>
 
               <div class="col-auto mr-auto mb-1">
                 <h4 class="content">{{{this.name}}}</h4><br>
-                <small>2019.4.27</small>
+                <small>{{{this.date}}}</small>
               </div>
 
               <div class="cost mr-1">

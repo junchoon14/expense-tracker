@@ -38,11 +38,11 @@
               </span>
             </div>
             <select class="custom-select" id="category" name="category">
-              <option value="fa-home">家居物業</option>
-              <option value="fa-shuttle-van">交通出行</option>
-              <option value="fa-grin-beam">休閒娛樂</option>
-              <option value="fa-utensils">餐飲食品</option>
-              <option value="fa-pen">其他</option>
+              <option value="fa-home" {{setSelected 'fa-home' record.category}}>家居物業</option>
+              <option value="fa-shuttle-van" {{setSelected 'fa-shuttle-van' record.category}}>交通出行</option>
+              <option value="fa-grin-beam" {{setSelected 'fa-grin-beam' record.category}}>休閒娛樂</option>
+              <option value="fa-utensils" {{setSelected 'fa-utensils' record.category}}>餐飲食品</option>
+              <option value="fa-pen" {{setSelected 'fa-pen' record.category}}>其他</option>
             </select>
           </div>
         </div>

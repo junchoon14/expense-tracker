@@ -48,6 +48,10 @@ router.put('/:id', authenticated, (req, res) => {
   Record.findOne({ _id: req.params.id, userId: req.user._id }, (err, record) => {
     if (err) return console.error(err)
     record.name = req.body.name
+    record.category = req.body.category
+    record.date = req.body.date
+    record.amount = req.body.amount
+    record.userId = req.user._id
     record.save(err => {
       if (err) return console.error(err)
       return res.redirect(`/`)
