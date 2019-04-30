@@ -1,19 +1,20 @@
 const express = require('express')
 const router = express.Router()
 const Record = require('../models/record')
+const { authenticated } = require('../config/auth')
 
 // list all
-router.get('/', (req, res) => {
+router.get('/', authenticated, (req, res) => {
   res.send('list all records')
 })
 
 // new page
-router.get('/new', (req, res) => {
+router.get('/new', authenticated, (req, res) => {
   return res.render('new')
 })
 
 // show detail page
-router.get('/:id', (req, res) => {
+router.get('/:id', authenticated, (req, res) => {
   Record.findById(req.params.id, (err, record) => {
     if (err) return console.error(err)
     return res.render('detail', { record })
@@ -21,7 +22,7 @@ router.get('/:id', (req, res) => {
 })
 
 //  create feature
-router.post('/', (req, res) => {
+router.post('/', authenticated, (req, res) => {
   const record = Record(req.body)
   record.save(err => {
     if (err) return console.error(err)
@@ -30,14 +31,14 @@ router.post('/', (req, res) => {
 })
 
 // edit page
-router.get('/:id/edit', (req, res) => {
+router.get('/:id/edit', authenticated, (req, res) => {
   Record.findById(req.params.id, (err, record) => {
     return res.render('edit', { record })
   })
 })
 
 // edit feature
-router.put('/:id', (req, res) => {
+router.put('/:id', authenticated, (req, res) => {
   Record.findById(req.params.id, (err, record) => {
     if (err) return console.error(err)
     record.name = req.body.name
@@ -49,7 +50,7 @@ router.put('/:id', (req, res) => {
 })
 
 // delete feather
-router.delete('/:id/delete', (req, res) => {
+router.delete('/:id/delete', authenticated, (req, res) => {
   Record.findById(req.params.id, (err, record) => {
     if (err) return console.error(err)
     record.remove(err => {
