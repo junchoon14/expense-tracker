@@ -7,7 +7,7 @@ router.get('/', (req, res) => {
   res.send('list all records')
 })
 
-// create page
+// new page
 router.get('/new', (req, res) => {
   return res.render('new')
 })
@@ -37,19 +37,19 @@ router.get('/:id/edit', (req, res) => {
 })
 
 // edit feature
-router.post('/:id', (req, res) => {
+router.put('/:id', (req, res) => {
   Record.findById(req.params.id, (err, record) => {
     if (err) return console.error(err)
     record.name = req.body.name
     record.save(err => {
       if (err) return console.error(err)
-      return res.redirect(`/records/${req.params.id}`)
+      return res.redirect(`/`)
     })
   })
 })
 
 // delete feather
-router.post('/:id/delete', (req, res) => {
+router.delete('/:id/delete', (req, res) => {
   Record.findById(req.params.id, (err, record) => {
     if (err) return console.error(err)
     record.remove(err => {

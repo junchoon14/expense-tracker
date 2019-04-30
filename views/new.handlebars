@@ -5,7 +5,7 @@
         <small class="mr-5">*為必填項目</small>
         <h4>請輸入你的支出</h4>
       </div>
-      <form action="/records/new" method="GET">
+      <form action="/records" method="POST">
         <div class="form-group">
           <div class="input-group mb-3">
             <div class="input-group-prepend">
@@ -41,11 +41,11 @@
             </div>
             <select class="custom-select" id="inputGroupSelect01" name="category">
               <option selected>選取...</option>
-              <option value="1">家居物業</option>
-              <option value="2">交通出行</option>
-              <option value="3">休閒娛樂</option>
-              <option value="4">餐飲食品</option>
-              <option value="5">其他</option>
+              <option value="fa-home">家居物業</option>
+              <option value="fa-shuttle-van">交通出行</option>
+              <option value="fa-grin-beam">休閒娛樂</option>
+              <option value="fa-utensils">餐飲食品</option>
+              <option value="fa-pen">其他</option>
             </select>
           </div>
         </div>
@@ -57,14 +57,14 @@
                 金額*
               </span>
             </div>
-            <input type="text" class="form-control" id="cost" name="cost" value="">
+            <input type="text" class="form-control" id="amount" name="amount" value="">
           </div>
         </div>
 
         <button type="submit" class="btn btn-info float-left mt-2">儲存</button>
       </form>
 
-      <a href="/" class="btn btn-secondary float-right mt-2">回主畫面</a>
+      <a href="/" class="btn btn-secondary float-right mt-2">取消</a>
 
 
     </div>
